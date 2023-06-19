@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Network Nebula anime</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Plus+Jakarta+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/mobile-nav.css">
+  <link rel="stylesheet" href="./css/styles.css">
+  <link rel="stylesheet" href="./css/products.css">
+  <script src="./js/mobile-nav.js"></script>
+  <!---------------------------------------------------------------------------- Vue.js library ----------------------->
+  <script src="https://unpkg.com/vue@2.6.14/dist/vue.js"></script>
+</head>
+
+<body>
+	
+  <div class="header">
+    <nav class="navi">
+    <div class="mobile-nav-btn" onclick="openNav()">&#9776;</div>
+      <ul class="navi-list">
+      <!-- Navigation links -->
+      <li><a href="./index.html">HOME</a></li>
+          <li class="centered-logo">
+            <!-- Logo -->
+            <a href="./index.html">
+               <img class="top_logo" src="./images/logo-b.png" alt=""/>
+            </a>
+          </li>
+          <li><a href="#">ACCOUNT</a></li>
+          <li><a href="./cart.html">CART</a></li>
+      </ul>
+    <div class="overlay" id="navbar">
+        <div href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</div>
+        <div class="overlay-content">
+        <img class="overlay_logo" src="images/logo-w.png" alt=""/>
+        <div class="nav-links">
+              <!-- Overlay navigation links -->
+              <a class="home" href="./index.html">HOME</a>
+                <a class="account" href="./index.html">ACCOUNT</a>
+                <a class="cart" href="./cart.html">CART</a>
+        </div>
+      </div>
+    </div>
+    </nav>
+  </div>
+	
+<!--------------------------------------------------------------------------------- Vue App ------------------------------>
+  <div id="app">
+    <!-- Products component -->
+    <products-component></products-component>
+
+    <!-- Footer component -->
+    <footer-component></footer-component>
+  </div>
+
+	
+<!--------------------------------------------------------------------------------- Vue Templates ------------------------>
+<!-- Template for the Products component -->
+<template id="products-template">
+  <div>
+    <h1>Products</h1>
+    <div class="product-container">
+      <div v-for="product in products" :key="product.id" class="product">
+        <!-- Product image -->
+        <img :src="product.image" :alt="product.name">
+        <hr>
+        <h2>{{ product.name }}</h2>
+        <p>{{ product.price }}</p>
+        <button class="btn" @click="addToCart(product.id)">Add To Cart</button>
+      </div>
+    </div>
+  </div>
+</template>
+
+<!-- Template for the Footer component -->
+<template id="footer-template">
+  <footer>
+    <div class="logo">
+      <!-- Footer logo -->
+      <img src="./images/logo-w.png" alt="Footer Logo">
+    </div>
+    <div class="content">
+      <div class="links">
+        <ul>
+          <!-- Footer links -->
+          <li><a href="./index.html">Home</a></li>
+          <li><a href="./about-us.html">About Us</a></li>
+          <li><a href="./contact-us.html">Contact Us</a></li>
+          <li><a href="#">T&amp;C's</a></li>
+        </ul>
+      </div>
+      <hr>
+      <div class="address">
+        <div class="address-column">
+          <h2>VISIT OUR STORE</h2>
+          <p>303 Victoria Street<br>Hamilton, 3204<br>Waikato<br>New Zealand</p>
+        </div>
+        <div class="map-column">
+          <!-- Footer map -->
+          <img src="./images/map.png" alt="Footer Map">
+        </div>
+      </div>
+    </div>
+  </footer>
+</template>
+
+<!----------------------------------------------------------------------------------- Vue Components ------------------->
+<script>
+  // Vue component for the Products section
+  Vue.component('products-component', {
+    template: '#products-template',
+    data() {
+      return {
+        products: [
+          // Product data
+          {
+            id: 1,
+            name: 'Vanguard Cardigan',
+            price: '$64.99',
+            image: './images/products/product-1.png'
+          },
+           {
+             id: 2,
+             name: 'Cashmere V Neck Cardigan',
+             price: '$49.99',
+             image: './images/products/product-2.png'
+           },
+           {
+             id: 3,
+             name: 'Leather Bomber Jacket',
+             price: '$119.99',
+             image: './images/products/product-3.png'
+           },
+           {
+             id: 4,
+             name: 'Single Breasted Plaid Coat',
+             price: '$89.99',
+             image: './images/products/product-4.png'
+           },
+           {
+             id: 5,
+             name: 'Bliss Faux Fur Coat',
+             price: '$59.99',
+             image: './images/products/product-5.png'
+           },
+           {
+             id: 6,
+             name: 'Cream Long Sweater',
+             price: '$44.99',
+             image: './images/products/product-6.png'
+           },
+           {
+             id: 7,
+             name: 'Checked Shacket Coat',
+             price: '$74.99',
+             image: './images/products/product-7.png'
+           },
+           {
+             id: 8,
+             name: 'Grey Faux Fur Coat',
+             price: '$49.99',
+             image: './images/products/product-8.png'
+           },
+           // Can add more products here.
+           ]
+        };
+      },
+      methods: {
+        addToCart(productId) {
+          // Would handle adding the product to the cart. Though no functionality besides a link to cart page.
+          window.location.href = './cart.html';
+        }
+      }
+    });
+
+    // Vue component for the Footer section
+    Vue.component('footer-component', {
+      template: '#footer-template'
+    });
+
+    new Vue({
+      el: '#app'
+    });
+  </script>
+</body>
+</html>
